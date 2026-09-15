@@ -48,14 +48,19 @@ Multi-agent autonomous systems cannot achieve production deployment in mission-c
 
 ## 5. Research Gap
 
-| Prior Research Domain | Primary Mechanism | Critical Vulnerability / Gap Addressed by This Work |
-|---|---|---|
-| **Decentralized Agent Registries (e.g., ERC-8004)** | Global, on-chain feedback registries and agent cards. | Highly vulnerable to coordinated Sybil reviews (up to 90.6% observed) and endpoint unreachability; feedback is not tied to verified task execution proofs. |
-| **Multi-Agent Reputation (e.g., Beta Reputation, REGRET)** | Statistical aggregation of peer ratings across interactions. | Treats reputation as a monolithic scalar; ignores task-specific capability alignment and semantic task similarity. |
-| **Trustworthy RAG Systems** | Semantic grounding of LLM generation against document corpora. | Applied almost exclusively to text generation rather than multi-agent service discovery, tool invocation, and trust modeling. |
-| **Cryptographic Provenance** | Hash chains, Merkle trees, and transparency logs. | Cryptography guarantees data immutability, but immutability alone does not verify whether an agent executed a task correctly. |
+| Prior Research Domain | Key Published Works | Primary Mechanism | Critical Operational Boundary & Gap |
+|:---|:---|:---|:---|
+| **Decentralized Registries** | ERC-8004 Spec (2025), Xiong et al. (2026) | Global on-chain discovery registries and star ratings. | Does not guarantee uptime (85%–97% offline); vulnerable to coordinated Sybils (59%–90% of reviews). |
+| **Classical MAS Trust** | REGRET (2002), Beta (2002), EigenTrust (2003), FIRE (2006), TRAVOS (2006) | Statistical Bayesian rating aggregation and recency decay. | Designed for scalar e-commerce ratings; blind to semantic task embeddings, LLM tools, or multimodal outputs. |
+| **Context-Aware Reputation** | AgentReputation (Chishti et al. 2026) | 3-tier decentralized context-conditioned reputation cards. | Evaluates marketplace-level cards; does not evaluate client-local verified evidence under adversarial attack. |
+| **Agent Provenance** | PROV-AGENT (Souza et al. 2025) | W3C PROV telemetry capturing prompts and tool executions. | Retrospective observability tool; does not perform predictive risk-gated service selection during planning. |
+| **LLM Output Verification** | Huang et al. (2024), CRITIC (Gou et al. 2024) | Deterministic tool-interactive output critiquing. | Evaluates single-agent reasoning self-correction; does not address multi-agent service provider selection. |
+| **Tool Calling Protocols** | Toolformer (2023), Anthropic MCP (2024) | Standardized JSON-RPC tool discovery and execution. | Operates under the benevolent assumption; assumes all external tools are benign, reliable, and non-adversarial. |
 
-**The Gap:** A disciplined, controlled framework that synthesizes **task-specific historical interaction retrieval**, **rigorous post-execution verification**, and **tamper-evident provenance commitments** to govern autonomous service selection.
+**The Residual Research Gap:**  
+A closed-loop, evidence-grounded service selection framework for autonomous AI agents that synthesizes **semantic task matching (vector RAG)**, **deterministic 4-tier output verification**, and **tamper-evident provenance anchoring**, evaluated through a **controlled empirical comparison** against reputation-only selection under adversarial conditions.
+
+*See detailed analysis in [docs/02-research/research-gap-analysis.md](docs/02-research/research-gap-analysis.md), [docs/02-research/literature-matrix.md](docs/02-research/literature-matrix.md), and [docs/02-research/novelty-matrix.md](docs/02-research/novelty-matrix.md).*
 
 ---
 
@@ -433,15 +438,47 @@ Academic integrity is paramount in this work:
 
 ---
 
-## 21. Key References
+## 21. Key Academic References & Research Grounding
 
-1. **Xiong, X., Li, Z., Wei, W., Wang, Q., Knottenbelt, W. J., & Wang, Z. (2026).** *Can Trustless Agents Be Trusted? An Empirical Study of the ERC-8004 Decentralized AI Agent Ecosystem.* arXiv:2606.26028.
-2. **Sabater, J., & Sierra, C. (2002).** *REGRET: A reputation model for multi-agent systems.* Autonomous Agents and Multi-Agent Systems, 5(1), 33-55.
-3. **Jøsang, A., & Ismail, R. (2002).** *The beta reputation system.* Proceedings of the 15th Bled Electronic Commerce Conference.
-4. **Anthropic. (2024).** *Model Context Protocol (MCP) Specification.* https://modelcontextprotocol.io
-5. **Yu, H., Shen, Z., Miao, C., Leung, C., & Niyato, D. (2013).** *A survey of multi-agent trust management systems.* IEEE Access, 1, 35-50.
+This project is grounded in real, verified academic literature and official technical standards. All preprints are explicitly identified as non-peer-reviewed working papers.
 
-See [docs/02-research/references.md](docs/02-research/references.md) for the complete annotated bibliography.
+### Primary Foundations by Research Family
+1. **Agent Identity & Registries:**
+   - Xiong, X., Li, Z., Wei, W., Wang, Q., Knottenbelt, W. J., & Wang, Z. (2026). *Can Trustless Agents Be Trusted? An Empirical Study of the ERC-8004 Decentralized AI Agent Ecosystem.* arXiv:2606.26028 [cs.CR]. *(arXiv Preprint)*
+   - Ethereum Improvement Proposals. (2025). *ERC-8004: Trustless AI Agent Standard — Identity, Reputation, and Validation Registries.* EIP-8004. *(Official Technical Specification)*
+2. **Agent Provenance & Traceability:**
+   - Souza, R., Gueroudji, A., DeWitt, S., Rosendo, D., Ghosal, T., Ross, R., Balaprakash, P., & da Silva, R. F. (2025). *PROV-AGENT: Unified Provenance for Tracking AI Agent Interactions in Agentic Workflows.* *2025 IEEE International Conference on eScience (eScience)*, pp. 467–473. DOI: 10.1109/eScience65000.2025.00093. *(Peer-Reviewed Conference)*
+3. **Context-Conditioned Agent Reputation:**
+   - Chishti, M. S., Oyinloye, D. P., & Li, J. (2026). *AgentReputation: A Decentralized Agentic AI Reputation Framework.* *Proceedings of the 34th ACM International Conference on the Foundations of Software Engineering (FSE 2026)* / arXiv:2605.00073. *(Peer-Reviewed Conference / Preprint)*
+4. **Decentralized Agent Networks & Trust:**
+   - Zhu, L., Li, Y., Wang, T., Chen, Z., Li, K., Liu, H., Wang, Y., Xu, L., Jiang, P., & Zhang, Z. (2026). *Blockchain Empowered Trustworthy Agent Networks: Foundations, Taxonomy, and Future Directions.* arXiv:2608.04626. *(arXiv Preprint)*
+5. **Evidence Credibility & Verifiable Retrieval:**
+   - Liu, B., Che, H., & Li, Y. (2026). *TrustRAG: Blockchain-Enhanced RAG via Committee-Based Credibility Scoring.* arXiv:2608.20097. *(arXiv Preprint)*
+6. **Classical Multi-Agent Trust Foundations:**
+   - Sabater, J., & Sierra, C. (2002). *REGRET: A reputation model for multi-agent systems.* *Autonomous Agents and Multi-Agent Systems*, 5(1), 33–55. DOI: 10.1023/A:1013734109878. *(Peer-Reviewed Journal)*
+   - Jøsang, A., & Ismail, R. (2002). *The Beta Reputation System.* *Proceedings of the 15th Bled Electronic Commerce Conference*, pp. 2502–2511. *(Peer-Reviewed Conference)*
+   - Kamvar, S. D., Schlosser, M. T., & Garcia-Molina, H. (2003). *The EigenTrust algorithm for reputation management in P2P networks.* *ACM WWW 2003*, pp. 640–651. DOI: 10.1145/775152.775242. *(Peer-Reviewed Conference)*
+   - Huynh, T. D., Jennings, N. R., & Shadbolt, N. R. (2006). *An integrated trust and reputation model for open multi-agent systems.* *Autonomous Agents and Multi-Agent Systems*, 13(2), 119–154. DOI: 10.1007/s10458-005-6825-4. *(Peer-Reviewed Journal)*
+   - Yu, H., Shen, Z., Miao, C., Leung, C., & Niyato, D. (2013). *A survey of multi-agent trust management systems.* *IEEE Access*, 1, 35–50. DOI: 10.1109/ACCESS.2013.2259837. *(Peer-Reviewed Journal)*
+7. **Agent Verification & Output Reliability:**
+   - Huang, J., Chen, X., Mishra, S., Zheng, H. S., Yu, A. W., Song, X., & Zhou, D. (2024). *Large Language Models Cannot Self-Correct Reasoning Yet.* *ICLR 2024* / arXiv:2310.01798. *(Peer-Reviewed Conference)*
+   - Gou, Z., Shao, Z., Gong, Y., Shen, Y., Yang, Y., Duan, N., & Chen, W. (2024). *CRITIC: Large Language Models Can Self-Correct with Tool-Interactive Critiquing.* *ICLR 2024* / arXiv:2305.11738. *(Peer-Reviewed Conference)*
+8. **Adversarial Modeling & Sybils:**
+   - Douceur, J. R. (2002). *The Sybil Attack.* *IPTPS '01*, Springer LNCS 2429, pp. 251–260. DOI: 10.1007/3-540-45748-8_24. *(Peer-Reviewed Conference)*
+   - Hoffman, K., Zage, D., & Nita-Rotaru, C. (2009). *A survey of attack and defense techniques for reputation systems.* *ACM Computing Surveys*, 42(1), Article 1. DOI: 10.1145/1592451.1592452. *(Peer-Reviewed Journal)*
+9. **Agent Tool Use & Protocols:**
+   - Schick, T., et al. (2023). *Toolformer: Language Models Can Teach Themselves to Use Tools.* *NeurIPS 2023*, 36, 68539–68551. *(Peer-Reviewed Conference)*
+   - Anthropic. (2024). *Model Context Protocol (MCP) Specification.* https://modelcontextprotocol.io. *(Official Technical Specification)*
+10. **Agent Payments (Future Work):**
+    - x402 Foundation & Coinbase Developer Platform. (2025). *x402: An Open Standard for Machine-to-Machine Payments over HTTP 402.* https://x402.org. *(Official Protocol Specification)*
+
+### Research Documentation Index
+- [Canonical Bibliography & Annotation](docs/02-research/references.md)
+- [Complete BibTeX Source](research/references.bib)
+- [Structured Literature Matrix](docs/02-research/literature-matrix.md)
+- [Research Gap Analysis](docs/02-research/research-gap-analysis.md)
+- [Novelty & Prior Art Matrix](docs/02-research/novelty-matrix.md)
+- [Claim-to-Evidence Traceability Map](docs/02-research/claim-evidence-map.md)
 
 ---
 
@@ -449,3 +486,4 @@ See [docs/02-research/references.md](docs/02-research/references.md) for the com
 
 This project is licensed under the [MIT License](LICENSE).  
 We welcome academic and open-source contributions. Please read [CONTRIBUTING.md](CONTRIBUTING.md) and adhere to our [Code of Conduct](CODE_OF_CONDUCT.md).
+

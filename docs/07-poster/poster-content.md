@@ -87,8 +87,10 @@ This document maps the exact text, scientific claims, presenter talking points, 
 
 ## Poster Section 10: References
 - **Poster Text:**  
-  1. Xiong et al. (2026), arXiv:2606.26028  
-  2. Sabater & Sierra (2002), *JAAMAS*  
-  3. Jøsang & Ismail (2002), *Bled Electronic Commerce*  
-  4. Anthropic (2024), *Model Context Protocol Spec*
-- **Where Supporting Docs Live:** [`docs/02-research/references.md`](../02-research/references.md).
+  1. Xiong et al. (2026), *ERC-8004 Empirical Study*, arXiv:2606.26028 (Preprint)  
+  2. Souza et al. (2025), *PROV-AGENT*, IEEE eScience 2025  
+  3. Chishti, Oyinloye, & Li (2026), *AgentReputation*, ACM FSE 2026  
+  4. Sabater & Sierra (2002), *REGRET Model*, JAAMAS  
+  5. Huang et al. (2024), *LLM Self-Correction Limits*, ICLR 2024  
+  6. Anthropic (2024), *Model Context Protocol (MCP) Specification*
+- **Where Supporting Docs Live:** [`docs/02-research/references.md`](../02-research/references.md), [`docs/02-research/literature-matrix.md`](../02-research/literature-matrix.md).

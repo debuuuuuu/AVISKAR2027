@@ -1,0 +1,32 @@
+flowchart TD
+    subgraph Adversaries["Threat Actors & Vectors"]
+        T1["Sybil Reviewers<br/>(Coordinated Feedback Inflation)"]
+        T2["Malicious Services<br/>(Poisoned Outputs, Deceptive Claims)"]
+        T3["Unreliable Services<br/>(Intermittent Timeouts, Flaky Logic)"]
+        T4["Eavesdroppers / Interceptors<br/>(Replay Attacks, Provenance Tampering)"]
+        T5["Byzantine Verifiers<br/>(Compromised Verification Rules)"]
+    end
+
+    subgraph TrustFramework["Trust Framework Defenses"]
+        D1["Decoupled Reputation with Sybil Discounting"]
+        D2["Task-Specific Evidence Retrieval & Schema Validation"]
+        D3["Multi-Dimensional Trust Scoring & Recency Decay"]
+        D4["Cryptographic Commitment Anchors (Blockchain / Merkle Root)"]
+        D5["Deterministic & Multi-Agent Verification Quorums"]
+    end
+
+    subgraph Boundaries["Trust Boundaries Protected"]
+        B1["Client Decision Boundary"]
+        B2["Evidence Store Integrity"]
+        B3["Service Execution Sandbox"]
+    end
+
+    T1 -->|Thwarted by| D1
+    T2 -->|Detected by| D2
+    T3 -->|Filtered by| D3
+    T4 -->|Defeated by| D4
+    T5 -->|Mitigated by| D5
+
+    D1 & D2 & D3 --> B1
+    D4 --> B2
+    D5 --> B3

@@ -1,0 +1,19 @@
+population:
+  total_agents: 30
+  reliable: 20
+  unreliable: 5
+  malicious: 5
+
+strategies:
+  - random
+  - reputation_only
+  - evidence_based
+
+metrics:
+  - task_success_rate
+  - malicious_agent_selection_rate
+  - false_rejection_rate
+  - verification_cost
+  - selection_latency
+
+seed: 2026

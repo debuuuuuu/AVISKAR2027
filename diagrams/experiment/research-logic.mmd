@@ -1,0 +1,37 @@
+flowchart TD
+    RQ["Research Question:<br/>Can task-specific, verifiable evidence improve autonomous AI-agent service selection compared with reputation-only scoring?"]
+    
+    subgraph Objectives["Formal Research Objectives"]
+        OBJ1["O1: Formulate multidimensional trust & evidence model"]
+        OBJ2["O2: Build modular simulation testbed with 30 heterogeneous agents"]
+        OBJ3["O3: Compare Random, Reputation-Only, and Evidence-Based selection"]
+        OBJ4["O4: Quantify trade-offs across 5 core evaluation metrics"]
+    end
+    
+    subgraph Components["System Components"]
+        COMP1["Trust Engine & Evidence Store"]
+        COMP2["Simulated Agent Population (20 R / 5 U / 5 M)"]
+        COMP3["Selection Engine (3 Strategies)"]
+        COMP4["Verification Layer & Evaluator"]
+    end
+    
+    subgraph Metrics["Empirical Evaluation Metrics"]
+        MET1["Task Success Rate (TSR)"]
+        MET2["Malicious-Agent Selection Rate (MASR)"]
+        MET3["False Rejection Rate (FRR)"]
+        MET4["Verification Cost Overhead (VCO)"]
+        MET5["Selection Decision Latency (SDL)"]
+    end
+    
+    subgraph EvidenceBase["Empirical Grounding"]
+        EVID["Existing Research Evidence:<br/>Xiong et al. (2026) ERC-8004 Empirical Study<br/>(3-15% Endpoint Availability, 59.2-90.6% Sybil Feedback)"]
+    end
+
+    RQ --> OBJ1 & OBJ2 & OBJ3 & OBJ4
+    OBJ1 --> COMP1
+    OBJ2 --> COMP2
+    OBJ3 --> COMP3
+    OBJ4 --> COMP4
+    COMP3 --> MET1 & MET2 & MET3
+    COMP4 --> MET4 & MET5
+    EVID -.->|Motivates Vulnerability Baseline| RQ

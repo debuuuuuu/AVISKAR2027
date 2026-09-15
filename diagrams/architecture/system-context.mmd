@@ -1,0 +1,38 @@
+flowchart TB
+    subgraph Users["Human & Ecosystem Context"]
+        User["User / Orchestrator<br/>(Specifies High-Level Goal)"]
+    end
+
+    subgraph TrustFramework["Trust-Aware Service Selection Framework (TrustAwareCore)"]
+        ClientAgent["Autonomous Client Agent<br/>(Task Executor & Coordinator)"]
+        TrustEngine["Trust Evaluation Engine<br/>(Multidimensional Assessor)"]
+        EvidenceStore["Evidence Store & Verifier<br/>(Provenance-Grounded Record)"]
+        SelectionEngine["Service Selection Engine<br/>(Decision Optimizer)"]
+    end
+
+    subgraph ExternalEcosystem["Decentralized Agent & Service Ecosystem"]
+        ServiceRegistry["Service Registry / Discovery Layer<br/>(ERC-8004 / Open Registries)"]
+        ReliableServices["Reliable Service Agents<br/>(Consistent, Valid Outputs)"]
+        UnreliableServices["Unreliable Service Agents<br/>(Fluctuating / Faulty Outputs)"]
+        MaliciousServices["Adversarial / Malicious Agents<br/>(Poisoned / Sybil / Deceptive Outputs)"]
+    end
+
+    subgraph SupportingTech["Supporting Infrastructure"]
+        VectorDB["Vector Database / RAG<br/>(Semantic Interaction Retrieval)"]
+        Ledger["Blockchain / Transparency Log<br/>(Tamper-Evident State Commitments)"]
+        MCPServer["MCP Tool Layer<br/>(Standardized Agent Tool Interfaces)"]
+    end
+
+    User -->|Delegates Goal| ClientAgent
+    ClientAgent -->|Queries Capabilities| ServiceRegistry
+    ServiceRegistry -->|Returns Candidates| ClientAgent
+    ClientAgent -->|Evaluates Trust| TrustEngine
+    TrustEngine -->|Retrieves Interaction Evidence| EvidenceStore
+    EvidenceStore <-->|Semantic Search| VectorDB
+    EvidenceStore <-->|Anchor / Validate Commitments| Ledger
+    TrustEngine -->|Provides Assessment| SelectionEngine
+    SelectionEngine -->|Selects Optimal Service| ClientAgent
+    ClientAgent -->|Invokes Tool / API via MCP| MCPServer
+    MCPServer --> ReliableServices
+    MCPServer --> UnreliableServices
+    MCPServer --> MaliciousServices

@@ -1,0 +1,32 @@
+flowchart LR
+    subgraph Inputs["Assessment Inputs"]
+        ID[Identity Proof<br/>- Public Key / DID<br/>- Registration Validity]
+        CAP[Capability Alignment<br/>- Schema Compatibility<br/>- Historical Domain Fit]
+        HIST[Task-Specific History<br/>- Past Verification Outcomes<br/>- Semantic Task Similarity]
+        EQUAL[Evidence Quality<br/>- Provenance Strength<br/>- Time Decay / Recency]
+        REP[Reputation Signal<br/>- Global Aggregate Feedback<br/>- Sybil Discount Factor]
+        RISK[Risk & Stakes Level<br/>- Irreversibility<br/>- Financial / Data Impact]
+    end
+
+    subgraph Assessment["Evaluation Process"]
+        TEE[Trust Evaluation Engine]
+        RAE[Risk Assessment Layer]
+    end
+
+    subgraph Decision["Selection Output"]
+        DecisionGate{Selection Gate}
+        Selected[Selected Service]
+        Rejected[Rejected / Fallback]
+    end
+
+    ID --> TEE
+    CAP --> TEE
+    HIST --> TEE
+    EQUAL --> TEE
+    REP --> TEE
+    RISK --> RAE
+
+    TEE --> DecisionGate
+    RAE --> DecisionGate
+    DecisionGate -->|Confidence >= Threshold(Risk)| Selected
+    DecisionGate -->|Confidence < Threshold(Risk)| Rejected

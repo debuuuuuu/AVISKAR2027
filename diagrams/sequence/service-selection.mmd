@@ -1,0 +1,38 @@
+sequenceDiagram
+    autonumber
+    actor User as User / Goal Initiator
+    participant CA as Client Agent
+    participant SR as Service Registry
+    participant RAG as RAG / Evidence Store
+    participant TE as Trust Evaluation Engine
+    participant BC as Blockchain Anchor
+    participant SP as Selected Service Provider
+    participant VL as Verification Layer
+
+    User->>CA: Submit Task Goal (Specification + Risk Level)
+    CA->>SR: Discover Candidates (Domain, Required Capability)
+    SR-->>CA: Return Candidate Pool [S1, S2, ..., Sn]
+    
+    loop For Each Candidate S_i
+        CA->>RAG: Query Past Task-Specific Evidence(S_i, TaskDomain)
+        RAG-->>CA: Return Top-K Evidence Records + Quality Scores
+        opt High-Stakes Task
+            CA->>BC: Verify Commitment Hash(EvidenceRecords)
+            BC-->>CA: Commitment Provenance Confirmed
+        end
+        CA->>TE: Evaluate Multi-Dimensional Trust(Identity, History, EvidenceQuality, Reputation, Risk)
+        TE-->>CA: Return Trust Assessment(Confidence, RiskScore, Decision)
+    end
+
+    CA->>CA: Selection Strategy: Rank Candidates & Select Best S*
+    alt Accept Best Candidate
+        CA->>SP: Dispatch Task Execution via MCP Tool Call
+        SP-->>CA: Return Raw Task Execution Result
+        CA->>VL: Verify Result(TaskSpec, RawResult)
+        VL-->>CA: Verification Record (Pass/Fail, QualityMetrics)
+        CA->>RAG: Append New Interaction & Verification Record
+        CA->>BC: Anchor Evidence State Commitment Hash
+        CA->>User: Deliver Verified Task Result
+    else Reject All Candidates (No Candidate Exceeds Trust Threshold)
+        CA->>User: Abort or Escalate (Refuse Execution to Prevent Harm)
+    end

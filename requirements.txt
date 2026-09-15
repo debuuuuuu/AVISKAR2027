@@ -1,0 +1,18 @@
+# Core Simulation & Data Modeling
+pydantic>=2.5.0
+pyyaml>=6.0.1
+typing-extensions>=4.8.0
+
+# Vector & Semantic Evidence (RAG)
+numpy>=1.24.0
+
+# Cryptography & State Commitments
+cryptography>=41.0.0
+
+# Testing & Quality
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# CLI & Utilities
+rich>=13.7.0
+python-dotenv>=1.0.0

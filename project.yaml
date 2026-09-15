@@ -1,0 +1,19 @@
+name: trust-aware-service-selection
+version: 0.1.0
+status: research-prototype
+research_question: "Can task-specific, verifiable evidence improve autonomous AI-agent service selection compared with reputation-only scoring?"
+experiment:
+  agents: 30
+  reliable: 20
+  unreliable: 5
+  malicious: 5
+  strategies:
+    - random
+    - reputation-only
+    - evidence-based
+  metrics:
+    - task_success_rate
+    - malicious_agent_selection_rate
+    - false_rejection_rate
+    - verification_cost
+    - selection_latency

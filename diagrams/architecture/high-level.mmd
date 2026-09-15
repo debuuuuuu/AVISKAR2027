@@ -1,0 +1,40 @@
+flowchart TD
+    TI[1. Task Input & Specification] --> SD[2. Service Discovery]
+    SD --> SC[3. Service Candidate Pool]
+    SC --> EG[4. Task-Specific Evidence Gathering]
+    
+    subgraph MultiDimEval["5. Multidimensional Trust Assessment"]
+        E1[Identity Verification]
+        E2[Claimed vs Observed Capability]
+        E3[Task-Specific Interaction History]
+        E4[Evidence Quality & Recency]
+        E5[Decoupled Reputation Signal]
+        E6[Task Risk & Stakes Assessment]
+        
+        E1 --- TE[Trust Evaluation Engine]
+        E2 --- TE
+        E3 --- TE
+        E4 --- TE
+        E5 --- TE
+        E6 --- TE
+    end
+    
+    EG --> MultiDimEval
+    MultiDimEval --> TD{6. Trust Decision}
+    
+    TD -->|Accept & Dispatch| TE_Exec[7. Task Execution via Service]
+    TD -->|Reject / Fallback| FB[Alternative Candidate / Reject Task]
+    
+    TE_Exec --> RV[8. Result Verification & Validation]
+    RV --> EU[9. Tamper-Evident Evidence Update]
+    
+    subgraph Infrastructure["Supporting Technology Anchors"]
+        RAG[RAG: Vector Evidence Retrieval]
+        MCP[MCP: Agent Tool Interface]
+        BC[Blockchain: Cryptographic Commitments]
+    end
+    
+    EG -.->|Query| RAG
+    TE_Exec -.->|Protocol| MCP
+    EU -.->|Commit Hash| BC
+    EU -->|Feedback Loop| EG

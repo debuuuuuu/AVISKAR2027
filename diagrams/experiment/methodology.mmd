@@ -1,0 +1,32 @@
+flowchart TD
+    subgraph Population["Simulated Agent Population (N = 30)"]
+        R[20 Reliable Services<br/>Consistent valid outputs]
+        U[5 Unreliable Services<br/>Intermittent failures & latency]
+        M[5 Malicious Services<br/>Deceptive, sybil-backed & poisoned outputs]
+    end
+
+    subgraph TaskGen["Controlled Workload Generator"]
+        TG[Task Generator<br/>- Deterministic tasks<br/>- Variable complexity<br/>- Assigned risk tiers]
+    end
+
+    subgraph Strategies["Benchmarked Selection Strategies"]
+        S1["Strategy 1: Random Selection<br/>(Null Baseline)"]
+        S2["Strategy 2: Reputation-Only<br/>(ERC-8004 Global Feedback Baseline)"]
+        S3["Strategy 3: Evidence-Based<br/>(Proposed Framework: Task-Specific History + Verification)"]
+    end
+
+    subgraph Evaluation["Comparative Evaluation (5 Metrics)"]
+        M1["Task Success Rate (TSR) ↑"]
+        M2["Malicious-Agent Selection Rate (MASR) ↓"]
+        M3["False Rejection Rate (FRR) ↓"]
+        M4["Verification Cost Overhead (VCO) ↓"]
+        M5["Selection Decision Latency (SDL) ↓"]
+    end
+
+    Population --> TG
+    TG --> S1
+    TG --> S2
+    TG --> S3
+    S1 --> Evaluation
+    S2 --> Evaluation
+    S3 --> Evaluation

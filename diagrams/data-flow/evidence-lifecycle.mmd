@@ -1,0 +1,15 @@
+stateDiagram-v2
+    [*] --> InteractionRecorded: Service Execution Completes
+    InteractionRecorded --> ResultVerified: Verification Module Assesses Output
+    ResultVerified --> EvidenceConstructed: Format VerificationRecord & Metadata
+    EvidenceConstructed --> LocalStorage: Write to Off-Chain Evidence Store
+    EvidenceConstructed --> VectorIndex: Index Semantic Representation (RAG)
+    EvidenceConstructed --> StateCommitment: Compute Merkle Root / SHA-256 Hash
+    StateCommitment --> OnChainAnchor: Anchor Commitment to Blockchain Log
+    
+    LocalStorage --> TrustAssessment: Query During Future Service Discovery
+    VectorIndex --> TrustAssessment: Retrieve Task-Relevant Historical Traces
+    OnChainAnchor --> IntegrityCheck: Verify Provenance Before Critical Decision
+    
+    TrustAssessment --> DecisionMade: Select or Reject Candidate Service
+    DecisionMade --> InteractionRecorded: New Task Executed (Continuous Feedback)

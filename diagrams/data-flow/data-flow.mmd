@@ -1,0 +1,38 @@
+flowchart LR
+    subgraph Client["Client Agent Boundary"]
+        TaskSpec["Task Specification<br/>{id, domain, input, risk, timeout}"]
+        RAGQuery["Semantic Query<br/>{domain, task_type, embedding}"]
+        EvalMatrix["Trust Evaluation Vector<br/>{id_score, cap_score, hist_score, qual, rep, risk}"]
+        ExecPayload["MCP Tool Call<br/>{service_id, method, arguments, auth}"]
+    end
+
+    subgraph Storage["Storage & Proof Layers"]
+        RAGIndex[("Vector Index<br/>(Embeddings)")]
+        DocStore[("Evidence Store<br/>(Full Interaction JSON)")]
+        ChainLedger[("Blockchain Anchor<br/>(SHA-256 Commitments)")]
+    end
+
+    subgraph External["External Service"]
+        ServiceNode["Service Agent<br/>(Executes Task)"]
+        RawResult["Raw Output Result<br/>{status, data, signature}"]
+    end
+
+    subgraph Verifier["Verification Layer"]
+        VerificationModule["Verification Engine<br/>(Deterministic / Consensus / Schema)"]
+        VRecord["Verification Record<br/>{success: bool, latency, score, hash}"]
+    end
+
+    TaskSpec --> RAGQuery
+    RAGQuery --> RAGIndex
+    RAGIndex -->|Top-K Evidence IDs| DocStore
+    DocStore -->|Historical Evidence Payloads| EvalMatrix
+    ChainLedger -.->|Verify Provenance Hashes| DocStore
+    EvalMatrix -->|Selection Decision| ExecPayload
+    ExecPayload --> ServiceNode
+    ServiceNode --> RawResult
+    RawResult --> VerificationModule
+    TaskSpec --> VerificationModule
+    VerificationModule --> VRecord
+    VRecord --> DocStore
+    VRecord --> RAGIndex
+    VRecord -->|Commitment Root| ChainLedger

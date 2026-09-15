@@ -1,0 +1,24 @@
+flowchart LR
+    subgraph Panel1["1. Problem & Existing Evidence"]
+        P_Prob["Open AI Agent Ecosystems Face Deception & Flakiness"]
+        P_Evid["ERC-8004 Empirical Study (Xiong et al. 2026):<br/>• Only 3-15% live endpoints<br/>• 59.2-90.6% coordinated Sybil reviewers<br/>• Reputation collapse upon Sybil filtering"]
+    end
+
+    subgraph Panel2["2. Proposed Framework"]
+        P_Input["Task Input & Stakes"] --> P_Disc["Service Discovery"]
+        P_Disc --> P_Eval["Trust Assessment:<br/>Identity + Capability + Task History +<br/>Evidence Quality + Reputation + Risk"]
+        P_Eval --> P_Select["Service Selection Strategy"]
+        P_Select --> P_Exec["Execution via MCP"]
+        P_Exec --> P_Verif["Result Verification"]
+        P_Verif --> P_Update["Tamper-Evident Evidence Update<br/>(RAG + Blockchain Anchor)"]
+        P_Update --> P_Eval
+    end
+
+    subgraph Panel3["3. Experimental Setup & Metrics"]
+        P_Pop["30 Simulated Agents:<br/>20 Reliable | 5 Unreliable | 5 Malicious"]
+        P_Strat["3 Strategies Evaluated:<br/>1. Random<br/>2. Reputation-Only<br/>3. Evidence-Based"]
+        P_Mets["5 Evaluation Metrics:<br/>• Task Success Rate (TSR) ↑<br/>• Malicious Selection (MASR) ↓<br/>• False Rejection (FRR) ↓<br/>• Verification Cost (VCO) ↓<br/>• Selection Latency (SDL) ↓"]
+    end
+
+    Panel1 --> Panel2
+    Panel2 --> Panel3

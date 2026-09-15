@@ -1,0 +1,30 @@
+flowchart TB
+    subgraph HostEnvironment["Client Agent Runtime (Local / Cloud Node)"]
+        AgentCore["Autonomous Client Agent Core"]
+        TrustEngine["Trust Engine & Selection Core"]
+        LocalEvidenceDB[("SQLite / DuckDB Evidence Cache")]
+        LocalVectorStore[("Chroma / FAISS Vector Store")]
+    end
+
+    subgraph Middleware["Interoperability & Protocol Layer"]
+        MCPServer["MCP Host Server<br/>(Exposes verify_agent, check_risk, etc.)"]
+    end
+
+    subgraph DecentralizedLayer["Decentralized Networks & Blockchains"]
+        ChainNode["Blockchain RPC / L2 Node<br/>(Base / Ethereum / Optimism)"]
+        SmartContracts["Evidence Provenance & Registry Contracts"]
+    end
+
+    subgraph ServiceProviders["External Agent Service Hosts"]
+        RemoteServiceA["Remote Agent Service A<br/>(HTTP / JSON-RPC / MCP Endpoint)"]
+        RemoteServiceB["Remote Agent Service B<br/>(HTTP / JSON-RPC / MCP Endpoint)"]
+    end
+
+    AgentCore <--> TrustEngine
+    TrustEngine <--> LocalEvidenceDB
+    TrustEngine <--> LocalVectorStore
+    AgentCore <--> MCPServer
+    MCPServer <--> RemoteServiceA
+    MCPServer <--> RemoteServiceB
+    LocalEvidenceDB -.->|Periodic State Commitment| ChainNode
+    ChainNode <--> SmartContracts

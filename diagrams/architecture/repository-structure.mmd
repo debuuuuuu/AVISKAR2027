@@ -1,0 +1,38 @@
+flowchart TB
+    Root["/ (Repository Root)"]
+    
+    subgraph CoreDocs["docs/ (Authoritative Research & System Docs)"]
+        D1["01-overview/ (Vision, Problem, Objectives, Terminology)"]
+        D2["02-research/ (Literature, Gap, Evidence, Novelty, Limits)"]
+        D3["03-system-design/ (Architecture, Trust/Evidence Models, Threat, Security)"]
+        D4["04-experiment/ (Design, Population, Strategies, Metrics, Protocol, Results Schema)"]
+        D5["05-implementation/ (Modules, API, MCP, RAG, Blockchain, Tests)"]
+        D6["06-presentation/ (Handbook, Pitches, 50+ Judge Q&A, 20 Hard Qs, Demo)"]
+        D7["07-poster/ (Panels, Layout, Evidence Mapping, Talking Points)"]
+        D8["08-roadmap/ (Status, Milestones, Future Work, x402 Scope)"]
+    end
+
+    subgraph Codebase["src/ (Modular Simulation & Core Engine)"]
+        S_Agent["agent/ (Autonomous client executor)"]
+        S_Trust["trust/ (Multi-dimensional evaluator)"]
+        S_Evidence["evidence/ (Store, lifecycle, and indexing)"]
+        S_Verification["verification/ (Validation engine)"]
+        S_Selection["selection/ (Random, Reputation, Evidence strategies)"]
+        S_RAG["rag/ (Vector retrieval & semantic filtering)"]
+        S_MCP["mcp/ (Model Context Protocol tool interfaces)"]
+        S_BC["blockchain/ (Cryptographic commitment anchor)"]
+        S_Services["services/ (Simulated Reliable, Unreliable, Malicious providers)"]
+        S_Exp["experiment/ (Orchestrator & metric evaluators)"]
+    end
+
+    subgraph ExperimentsAndTests["Validation & Infrastructure"]
+        Diag["diagrams/ (Mermaid source files .mmd)"]
+        Res["research/ (Papers, notes, references.bib)"]
+        Exp["experiments/ (Scenarios, configs, runs)"]
+        Tests["tests/ (Unit, integration, system suites)"]
+        Scripts["scripts/ (Runners, validation utilities)"]
+    end
+
+    Root --> CoreDocs
+    Root --> Codebase
+    Root --> ExperimentsAndTests
